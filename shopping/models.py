@@ -24,11 +24,17 @@ class Order(models.Model):
     complete =  models.BooleanField(default=False)
     order_id = models.CharField(max_length=75, null=False)
 
+    def __str__(self):
+        return str(self.id)
+
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, null=True, blank=True, on_delete=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=255, null=False)
     city = models.CharField(max_length=100, null=False)
     state = models.CharField(max_length=100, null=False)
     zipcode = models.CharField(max_length=100, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.address
