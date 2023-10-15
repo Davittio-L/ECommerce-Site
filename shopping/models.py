@@ -18,3 +18,8 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.CASCADE)
+    date_ordered = models.DateTimeField(auto_now=True, null=True, blank=True)
+    complete =  models.BooleanField(default=False)
+    order_id = models.CharField(max_length=75, null=False)
