@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, inital-scale=1, maximum-scale=1, minimum-scale=1" />
 
-    <link rel="stylesheet" href="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
@@ -29,7 +29,7 @@
           <div class="form-inline my-2 my-lg-0">
             <a href="#"class="btn btn-warning">Login</a>
             <a href="{% url 'cart' %}">
-                <img id="shoppingcart-icon" src="{% static images/shoppingcart.png %}">
+                <img id="shoppingcart-icon" src="{% static 'images/shoppingcart.png' %}">
             </a>
             <p id="cart-total">0</p>
           </div>
