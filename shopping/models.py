@@ -13,21 +13,22 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.FloatField()
-    in_stock = models.BooleanField(default=False, null=True, blank=True)
-    digital = models.BooleanField(default=False, null=True, blank=True)
+    in_stock = models.BooleanField(default=False)
+    digital = models.BooleanField(default=False)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-@property
-def imageURL(self):
-    try:
-        url = self.image.url
-    except:
-        url = ''
-    return url
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
+    
 class Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.CASCADE)
     date_ordered = models.DateTimeField(auto_now=True, null=True, blank=True)
