@@ -37,6 +37,15 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def shipping(self):
+        shipping = False
+        orderItems = self.orderitem.all()
+        for i in orderitems:
+            if i.product.digital == False:
+                shipping - True
+        return shipping
     
     @property
     def get_cart_total(self):
