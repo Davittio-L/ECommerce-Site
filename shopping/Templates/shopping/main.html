@@ -30,6 +30,29 @@
         return cookieValue;
       }
       var csrftoken = getToken('csrftoken')
+
+      function getCookie(name) {
+        //Split cookie String and get all individual name=value pairs in an array
+        var cookieArr = document.cookie.split(";");
+
+        //Loop through the array elements
+        for (var i = 0; i < cookieArr.length; i++) {
+          var cookiePair = cookieArr[i].split("=");
+
+          if(name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+        return null;
+      }
+      var cart = JSON.parse(getCookie('cart')) 
+
+      if (cart == undefined) {
+        cart = {}
+        console.log('Cart Created!', cart);
+        document.cookie = 'cart' + JSON.stringify(cart); + ";domain='path=/"
+      }
+      console.log('Cart:', cart)
     </script>
 
 </head>
