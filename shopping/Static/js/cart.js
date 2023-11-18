@@ -58,7 +58,7 @@ function addCookieItem(productId, action) {
 		}
 	}
 	console.log('CART:', cart)
-	document.cookie = 'cart' + JSON.stringify(cart) + ";domain=path=/"
+	document.cookie = 'cart=' + JSON.stringify(cart) + ";path=/"
 
 	location.reload()
 }

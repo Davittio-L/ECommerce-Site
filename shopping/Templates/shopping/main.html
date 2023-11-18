@@ -50,7 +50,8 @@
       if (cart == undefined) {
         cart = {}
         console.log('Cart Created!', cart);
-        document.cookie = 'cart' + JSON.stringify(cart); + ";domain='path=/"
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";path=/"
+        // document.cookie = 'cart' + JSON.stringify(cart); + ";domain='path=/"
       }
       console.log('Cart:', cart)
     </script>
@@ -82,10 +83,6 @@
 	    		<img  id="cart-icon" src="{% static 'images/shoppingcart.png' %}">
 	    	</a>
 	    	<p id="cart-total">0</p>
-        <!-- <a href="{% url 'cart' %}">
-          <img id="cart-icon" src="{% static 'images/cart.png' %}">
-        </a>
-        <p id="cart-total">{{CartItems}}</p> -->
           </div>
         </div>
       </nav>
