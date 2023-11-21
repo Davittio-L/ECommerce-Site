@@ -3,10 +3,11 @@ from django.http import JsonResponse
 import json
 import datetime
 from .models import * 
-from .utils import cookieCart, cartData
+from .utils import cookieCart, cartData, guestOrder
 
 def store(request):
 	data = cartData(request)
+
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
@@ -17,8 +18,8 @@ def store(request):
 
 
 def cart(request):
-
 	data = cartData(request)
+
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
@@ -27,8 +28,8 @@ def cart(request):
 	return render(request, 'shopping/cart.html', context)
 
 def checkout(request):
-
 	data = cartData(request)
+	
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
@@ -68,35 +69,8 @@ def processOrder(request):
 	if request.user.is_authenticated:
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-
 	else:
-		print('User is not logged in')
-
-		print('COOKIES:', request.COOKIES)
-		name = data['form']['name']
-		email = data['form']['email']
-
-		cookieData = cookieCart(request)
-		items = cookieData['items']
-
-		customer, created = Customer.objects.get_or_create(
-				email=email,
-				)
-		customer.name = name
-		customer.save()
-
-		order = Order.objects.create(
-			customer=customer,
-			complete=False,
-			)
-
-		for item in items:
-			product = Product.objects.get(id=item['id'])
-			orderItem = OrderItem.objects.create(
-				product=product,
-				order=order,
-				quantity=item['quantity'],
-			)
+		customer, order = guestOrder(request, data)
 
 	total = float(data['form']['total'])
 	order.transaction_id = transaction_id
