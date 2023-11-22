@@ -73,6 +73,12 @@
 
 <script>
     paypal.Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'rect',
+        },
+
         createOrder: function(data, actions){
             return action.order.create({
                 purchase_units: [{
